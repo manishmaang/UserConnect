@@ -1,0 +1,29 @@
+learn how to send the flash messages 
+
+Protected Routes => ese routes jinka access dene se pehle user ka authentication ya autherization check 
+krna pde unko protected routes kehte hai. 
+=> These routes ensure that only authenticated users can access certain parts of the application, such as
+ user dashboards, settings, or other sensitive information12.
+=> ex : /profile jo humne banaya hai app.js me jo pehle check kr rha hai ki user logged in hai ya nhi
+=> banking web app me dashboard jha pr balance,transaction,history ye sb hoti hai ye sb ek protected routes
+hai jha pr pehle check krna chahiye ki user authenticated credentials se logged in hai ya nhi
+
+basic app banana hai jisme : 
+=> user post create kr payenge 
+=> login and register kr payenge
+=> logout kr payenge
+=> delete kr payenge => only vo user jisne post create kiya tha
+
+
+user.populate("posts") =>user collection me jo posts feild hai use populate kro meaning jha se posts field ka reference liya hai
+(post collection se) vo pura document post feild me rkhdo 
+=> ye ek asynchronous task hai
+
+user.forEach() isiliye error de rha tha in profile.ejs kyuki user ek object hai or forEach sirf array ke sth use kiya ja skta hai
+=> user.posts ek array hai (array of post objects hai) isiliye user.posts ke sth forEach chl rha hai 
+=> user.posts.forEach(function(POST)) me POST ek variable hai jo ki posts array me present hr ek elements(object) ko 
+represent kr rha hai.
+=> Inside the forEach loop, post will refer to each individual post object. isiliye post.content likhna pda to access 
+the content of that object present inside user.posts agr POST ki index likha hota to fir index.content likhna pdta
+
+=>user.populate("posts") ko hum userModel.findOne().populate("posts") ese bhi likh skte hai

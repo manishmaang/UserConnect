@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class=" w-full min-h-screen bg-zinc-900 text-white p-10">
+        <div class="w-full flex justify-end">
+            <a href="/logout" class="bg-red-500 rounded-md px-3 py-2 text-sm mb-2 inline-block">Log Out</a>
+        </div>
+        
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-md overflow-hidden">
+            <img class=" w-full h-full object-cover" src="/images/uploads/<%= user.profilepic %>" alt="">
+          </div>
+          <h3 class="text-2xl"> <span class="font-light mt-2 ">Hello !! </span><%= user.name %>👻</h3>
+        </div>
+
+       <h5 class="mt-2 mb-5">you can create a new post here !!</h5>
+
+       <form action="/post" method="post">
+        <textarea placeholder="What's on your mind ??" name="content" class=" block p-3 w-1/4 resize-none bg-transparent border-2 border-zinc-800 outline-none rounded-md"></textarea>
+        <input type="submit" class="block mt-2 w-40 text-sm bg-blue-500 rounded-md px-3 py-2" value="Create New Post">
+       </form>
+
+       <div class="posts mt-10">
+         <h3 class=" text-zinc-400"> Your Posts are here.</h3>
+         <div class="postcontainer mt-2 w-full">
+            <%user.posts.reverse().forEach(function(post){%>
+                <div class="post mb-2 w-1/4 p-2 border-[1px] border-zinc-800 bg-zinc-800 rounded-md">
+                    <h4 class=" text-blue-500 mb-1">@<%= user.username %></h4>
+                    <p class="text-sm tracking-tight"><%= post.content %></p>
+                    <small class=" mt-1 inline-block"><%= post.likes.length %> likes</small>
+                    <div class="btns flex gap-4 ">
+                      <a class="text-blue-500" href="/like/<%= post._id %>">
+                        <%= post.likes.indexOf(user._id) === -1 ?"Like" : "Unlike"%>
+                      </a>
+                      <a class="text-zinc-500" href="/edit/<%= post._id %>">Edit</a>
+                    </div>
+              </div>
+            <%})%>
+         </div>
+       </div>
+    </div>
+</body>
+</html>
